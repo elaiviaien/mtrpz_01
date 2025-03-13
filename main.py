@@ -45,7 +45,6 @@ def main(file):
                 if not match:
                     raise ValueError("invalid file format")
                 a, b, c = map(float, match.groups())
-                solve_quadratic(a, b, c)
         except FileNotFoundError:
             click.echo(f"file {file} does not exist")
             sys.exit(1)
