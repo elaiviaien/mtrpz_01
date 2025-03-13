@@ -33,7 +33,7 @@ Provide a file containing three space-separated numbers (coefficients `a b c`):
 
 Example file (`test_valid.txt`):
 ```
-1 -3 2
+2 1 -3
 ```
 
 Run the script with:
