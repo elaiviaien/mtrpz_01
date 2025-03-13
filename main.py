@@ -37,9 +37,15 @@ def get_float_input(prompt: str):
 @click.command()
 @click.argument('file', required=False, type=click.Path(exists=True))
 def main(file):
-    a = get_float_input("a")
-    b = get_float_input("b")
-    c = get_float_input("c")
+    if file:
+        with open(file, 'r') as f:
+            data = f.read().strip().split(' ')
+            a, b, c = float(data[0]), float(data[1], float(data[2]))
+            solve_quadratic(a, b, c)
+    else:   
+        a = get_float_input("a")
+        b = get_float_input("b")
+        c = get_float_input("c")
     solve_quadratic(a, b, c)
 
 if __name__ == "__main__":
