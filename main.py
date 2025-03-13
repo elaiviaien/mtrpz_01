@@ -37,9 +37,25 @@ def get_float_input(prompt: str):
 @click.command()
 @click.argument('file', required=False, type=click.Path(exists=True))
 def main(file):
-    a = get_float_input("a")
-    b = get_float_input("b")
-    c = get_float_input("c")
+    if file:
+        try:
+            with open(file, 'r') as f:
+                content = f.read().strip()
+                match = re.fullmatch(r'([-+]?[0-9]*\.?[0-9]+)\s([-+]?[0-9]*\.?[0-9]+)\s([-+]?[0-9]*\.?[0-9]+)', content)
+                if not match:
+                    raise ValueError("invalid file format")
+                a, b, c = map(float, match.groups())
+                solve_quadratic(a, b, c)
+        except FileNotFoundError:
+            click.echo(f"file {file} does not exist")
+            sys.exit(1)
+        except ValueError as e:
+            click.echo(str(e))
+            sys.exit(1)
+    else:
+        a = get_float_input("a")
+        b = get_float_input("b")
+        c = get_float_input("c")
     solve_quadratic(a, b, c)
 
 if __name__ == "__main__":
