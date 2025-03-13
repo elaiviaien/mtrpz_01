@@ -19,22 +19,20 @@ def solve_quadratic(a: float, b: float, c: float):
         click.echo(f"x2 = {x2}")
     elif discriminant == 0:
         x = -b / (2 * a)
-        click.echo("There are 1 root")
+        click.echo("There are 1 roots")
         click.echo(f"x1 = {x}")
     else:
         click.echo("There are 0 roots")
-
-def validate_float(value:float):
-        try:
-            return float(value)
-        except ValueError:
-            click.echo(f"Error. Expected a valid real number, got {value} instead")
 
 
 def get_float_input(prompt: str):
     while True:
         value = input(f"{prompt} = ")
-        return validate_float(value)
+        try:
+            return float(value)
+        except ValueError:
+            click.echo(f"Error. Expected a valid real number, got {value} instead")
+
 
 @click.command()
 @click.argument('file', required=False, type=click.Path(exists=True))
