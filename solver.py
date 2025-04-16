@@ -25,9 +25,9 @@ def solve_quadratic(a: float, b: float, c: float):
         click.echo("There are 0 roots")
 
 
-def get_float_input(prompt: str):
+def get_float_input(part: str):
     while True:
-        value = input(f"{prompt} = ")
+        value = click.prompt(f'Please enter a number for "{part}"', type=click.FLOAT)
         try:
             return float(value)
         except ValueError:
